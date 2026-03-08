@@ -84,6 +84,18 @@
       padding: clamp(1rem, 5vw, 3rem);
     }
 
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, min(var(--card-w), 100%));
+      gap: 1.25rem;
+      width: 100%;
+      max-width: calc(var(--card-w) * 2 + 1.25rem);
+    }
+
+    @media (max-width: 780px) {
+      .card-grid { grid-template-columns: min(var(--card-w), 100%); }
+    }
+
     .heading {
       font-family: var(--mono);
       font-size: clamp(.6rem, 2vw, .75rem);
@@ -97,7 +109,7 @@
 
     .card {
       position: relative;
-      width: min(var(--card-w), 100%);
+      width: 100%;
       background: var(--bg-mid);
       border: 1px solid var(--indigo-rim);
       border-radius: 2px;
@@ -237,6 +249,62 @@
 
     .card:hover .card-arrow { opacity: 1; transform: translateX(0); }
 
+    .card--linkedin {
+      animation-delay: .6s;
+    }
+
+    .card--linkedin .card::after,
+    .card--linkedin.card::after {
+      border-color: #0a66c2;
+    }
+
+    .card--linkedin .corner-bl {
+      border-color: rgba(10,102,194,.45);
+    }
+
+    .card--linkedin:hover {
+      border-color: #1d7fc4;
+      box-shadow:
+        0 0 0 1px rgba(10,102,194,.4),
+        0 0 30px rgba(10,102,194,.45),
+        0 0 70px rgba(10,102,194,.15),
+        0 8px 40px rgba(0,0,0,.65),
+        inset 0 1px 0 rgba(255,255,255,.07);
+    }
+
+    .card--linkedin::after {
+      border-color: #1d7fc4;
+    }
+
+    .card--linkedin .card-arrow { color: #1d7fc4; }
+
+    .card--linkedin .card-label::before { background: #1d7fc4; }
+
+    .card--linkedin .card-title span { color: #1d7fc4; }
+
+    .card--linkedin .divider { background: linear-gradient(90deg, #0a66c2 0%, transparent 100%); }
+
+    .card--linkedin .tag { border-color: rgba(10,102,194,.3); }
+
+    .card--linkedin:hover .tag {
+      border-color: rgba(29,127,196,.6);
+      box-shadow: inset 0 0 8px rgba(10,102,194,.15), 0 0 6px rgba(10,102,194,.12);
+    }
+
+    .card--linkedin::before {
+      background: linear-gradient(135deg, rgba(10,102,194,.1) 0%, transparent 55%);
+    }
+
+    .li-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: .3rem;
+      vertical-align: middle;
+      opacity: .55;
+      fill: #1d7fc4;
+      flex-shrink: 0;
+    }
     .footer {
       margin-top: clamp(1.25rem, 3vh, 2rem);
       font-family: var(--mono);
@@ -245,7 +313,7 @@
       color: var(--text-dim);
       text-transform: uppercase;
       opacity: 0;
-      animation: fadeUp .7s .7s forwards;
+      animation: fadeUp .7s .85s forwards;
     }
 
     @keyframes fadeUp {
@@ -309,19 +377,36 @@
   <main class="stage">
     <p class="heading">Data Engineering</p>
 
-    <a class="card" href="https://github.com/JorgenDeToussaint" target="_blank" rel="noopener noreferrer" aria-label="Portfolio and GitHub — JorgenDeToussaint">
-      <p class="card-label">portfolio / github</p>
-      <h1 class="card-title">Jorgen<br><span>De Toussaint</span></h1>
-      <div class="divider"></div>
-      <div class="card-stack">
-        <span class="tag">AWS</span>
-        <span class="tag">Spark</span>
-        <span class="tag">Python</span>
-        <span class="tag">SQL</span>
-      </div>
-      <span class="card-arrow">→ github.com</span>
-      <span class="corner-bl" aria-hidden="true"></span>
-    </a>
+    <div class="card-grid">
+      <a class="card" href="https://github.com/JorgenDeToussaint" target="_blank" rel="noopener noreferrer" aria-label="Portfolio and GitHub — JorgenDeToussaint">
+        <p class="card-label">portfolio / github</p>
+        <h1 class="card-title">Jorgen<br><span>De Toussaint</span></h1>
+        <div class="divider"></div>
+        <div class="card-stack">
+          <span class="tag">AWS</span>
+          <span class="tag">Spark</span>
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+        </div>
+        <span class="card-arrow">→ github.com</span>
+        <span class="corner-bl" aria-hidden="true"></span>
+      </a>
+
+      <a class="card card--linkedin" href="https://www.linkedin.com/in/mateusz-zalewski-091608322/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Mateusz Zalewski">
+        <p class="card-label">
+          <svg class="li-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          linkedin
+        </p>
+        <p class="card-title">Mateusz<br><span>Zalewski</span></p>
+        <div class="divider"></div>
+        <div class="card-stack">
+          <span class="tag">Data Engineer</span>
+          <span class="tag">Connect</span>
+        </div>
+        <span class="card-arrow">→ linkedin.com</span>
+        <span class="corner-bl" aria-hidden="true"></span>
+      </a>
+    </div>
 
     <p class="footer">github.com/JorgenDeToussaint</p>
   </main>
